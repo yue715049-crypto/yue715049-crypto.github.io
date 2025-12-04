@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block title %}{{ article.title|striptags }}{% endblock %}
+
+{% block hero %}
+<section id="article-hero"
+  style="background-image: url('{% if article.image %}{{ article.image }}{% else %}https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=1600&auto=format&fit=crop{% endif %}');">
+  <div class="hero-overlay"></div>
+  <div class="container hero-content-article">
+    <h1 class="article-title">{{ article.title }}</h1>
+    <div class="article-meta">
+      <span class="author">By {{ article.author }}</span>
+      <span class="date">{{ article.locale_date }}</span>
+    </div>
+  </div>
+</section>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "{{ article.title }}",
+  "image": [
+    "{% if article.image %}{{ article.image }}{% else %}https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=1600&auto=format&fit=crop{% endif %}"
+   ],
+  "datePublished": "{{ article.date.isoformat() }}",
+  "dateModified": "{{ article.modified.isoformat() if article.modified else article.date.isoformat() }}",
+  "author": [{
+      "@type": "Person",
+      "name": "{{ article.author }}",
+      "url": "{{ SITEURL }}/author/{{ article.author.slug }}.html"
+    }]
+}
+</script>
+{% endblock %}
+
+{% block content %}
+<article class="single-article">
+  {% include 'adsense.html' %}
+
+  <div class="entry-content">
+    {{ article.content }}
+  </div>
+</article>
+
+<div class="comments">
+  <h3>Comments</h3>
+  <!-- Placeholder for comments -->
+  <div style="background: #f9f9f9; padding: 20px; border-radius: 10px; color: #777;">
+    Comment section placeholder...
+  </div>
+</div>
+{% endblock %}
+
+{% block sidebar %}
+<aside id="sidebar">
+  <div class="widget author-widget">
+    <h3 class="widget-title">作者</h3>
+    <div class="author-profile">
+      <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=200&auto=format&fit=crop"
+        alt="{{ article.author }}" class="author-avatar">
+      <div class="author-info">
+        <h4>{{ article.author }}</h4>
+        <p>熱愛旅遊與攝影，喜歡發掘城市中的隱藏景點。希望能將美好的風景分享給大家。</p>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="widget">
+    <h3 class="widget-title">相關與熱門</h3>
+    <ul class="latest-posts">
+      <!-- We can't easily get related posts in pure Jinja without plugins, so showing latest/random -->
+      {% for article in articles[:3] %}
+      <li>
+        <div class="small-card">
+          <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=200&auto=format&fit=crop"
+            alt="Thumb">
+          <div>
+            <a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a>
+          </div>
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <div class="widget">
+    <h3 class="widget-title">人氣標籤</h3>
+    <div class="tag-cloud">
+      {% for tag in article.tags %}
+      <a href="{{ SITEURL }}/{{ tag.url }}" class="tag">{{ tag }}</a>
+      {% endfor %}
+      <a href="#" class="tag">景點推薦</a>
+      <a href="#" class="tag">美食攻略</a>
+    </div>
+  </div>
+</aside>
+{% endblock %}

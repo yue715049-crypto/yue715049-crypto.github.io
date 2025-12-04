@@ -1,0 +1,17 @@
+{% if GOOGLE_ADSENSE %}
+<div style="border: 1px solid #ccc; padding: 10px; margin: 20px 0; text-align: center; background: #f9f9f9;">
+    <p style="color: #666; font-size: 0.8em;">Advertisement</p>
+    <!-- Google AdSense Placeholder -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{ GOOGLE_ADSENSE.client }}"
+         crossorigin="anonymous"></script>
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="{{ GOOGLE_ADSENSE.client }}"
+         data-ad-slot="{{ GOOGLE_ADSENSE.slot }}"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</div>
+{% endif %}

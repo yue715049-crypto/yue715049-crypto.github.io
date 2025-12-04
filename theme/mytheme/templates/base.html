@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="{{ DEFAULT_LANG }}">
+
+<head>
+  {% block head %}
+  <title>{% block title %}{{ SITENAME }}{% endblock %}</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO Meta Tags -->
+  <meta name="description"
+    content="{% if article %}{{ article.summary|striptags|truncate(160) }}{% elif page %}{{ page.summary|striptags|truncate(160) }}{% else %}悅來越好玩 - 探索世界的美好，分享旅遊、美食與住宿的精彩體驗。{% endif %}" />
+  <meta name="keywords"
+    content="{% if article %}{{ article.tags|join(', ') }}{% else %}旅遊, 美食, 住宿, 景點推薦, 自由行{% endif %}" />
+  <meta name="author" content="{{ AUTHOR }}" />
+
+  {% if GOOGLE_SEARCH_CONSOLE %}
+  <meta name="google-site-verification" content="{{ GOOGLE_SEARCH_CONSOLE }}" />
+  {% endif %}
+
+  {% if FAVICON %}
+  <link rel="icon" href="{{ SITEURL }}/{{ FAVICON }}" type="image/x-icon" />
+  <link rel="shortcut icon" href="{{ SITEURL }}/{{ FAVICON }}" type="image/x-icon" />
+  {% endif %}
+
+  {% if GOOGLE_ADSENSE %}
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{ GOOGLE_ADSENSE.client }}"
+    crossorigin="anonymous"></script>
+  {% endif %}
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="{% if article %}article{% else %}website{% endif %}" />
+  <meta property="og:url" content="{{ SITEURL }}/{{ output_file }}" />
+  <meta property="og:title"
+    content="{% if article %}{{ article.title }} - {{ SITENAME }}{% else %}{{ SITENAME }}{% endif %}" />
+  <meta property="og:description"
+    content="{% if article %}{{ article.summary|striptags|truncate(200) }}{% else %}悅來越好玩 - 探索世界的美好，分享旅遊、美食與住宿的精彩體驗。{% endif %}" />
+  <meta property="og:image"
+    content="{% if article and article.image %}{{ article.image }}{% else %}https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1600&auto=format&fit=crop{% endif %}" />
+  <meta property="og:site_name" content="{{ SITENAME }}" />
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="{{ SITEURL }}/{{ output_file }}" />
+  <meta property="twitter:title"
+    content="{% if article %}{{ article.title }} - {{ SITENAME }}{% else %}{{ SITENAME }}{% endif %}" />
+  <meta property="twitter:description"
+    content="{% if article %}{{ article.summary|striptags|truncate(200) }}{% else %}悅來越好玩 - 探索世界的美好，分享旅遊、美食與住宿的精彩體驗。{% endif %}" />
+  <meta property="twitter:image"
+    content="{% if article and article.image %}{{ article.image }}{% else %}https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1600&auto=format&fit=crop{% endif %}" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Poppins:wght@400;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="{{ SITEURL }}/theme/css/style.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    type="text/css" />
+  {% if FEED_ALL_ATOM %}
+  <link
+    href="{{ FEED_DOMAIN }}/{% if FEED_ALL_ATOM_URL %}{{ FEED_ALL_ATOM_URL }}{% else %}{{ FEED_ALL_ATOM }}{% endif %}"
+    type="application/atom+xml" rel="alternate" title="{{ SITENAME }} Atom Feed" />
+  {% endif %}
+  {% if FEED_ALL_RSS %}
+  <link href="{{ FEED_DOMAIN }}/{% if FEED_ALL_RSS_URL %}{{ FEED_ALL_RSS_URL }}{% else %}{{ FEED_ALL_RSS }}{% endif %}"
+    type="application/rss+xml" rel="alternate" title="{{ SITENAME }} RSS Feed" />
+  {% endif %}
+  {% endblock head %}
+</head>
+
+<body id="index" class="home">
+  <header id="banner" class="body">
+    <div class="container">
+      <h1><a href="{{ SITEURL }}/">{{ SITENAME }}</a></h1>
+      <nav>
+        <ul id="menu">
+          {% for item in MENUITEMS %}
+          {% if item|length == 3 %}
+          <li class="has-submenu">
+            <a href="{{ item[1] }}">{{ item[0] }} <i class="fa fa-caret-down"></i></a>
+            <ul class="submenu">
+              {% for subitem in item[2] %}
+              <li><a href="{{ subitem[1] }}">{{ subitem[0] }}</a></li>
+              {% endfor %}
+            </ul>
+          </li>
+          {% else %}
+          <li><a href="{{ item[1] }}">{{ item[0] }}</a></li>
+          {% endif %}
+          {% endfor %}
+        </ul>
+      </nav>
+    </div>
+  </header><!-- /#banner -->
+
+  {% block hero %}{% endblock %}
+
+  <div class="container main-layout">
+    <main id="content">
+      {% block content %}
+      {% endblock %}
+    </main>
+
+    {% block sidebar %}{% endblock %}
+  </div>
+
+  <footer id="contentinfo" class="body">
+    <div class="container">
+      <address id="about" class="vcard body">
+        Proudly powered by <a href="https://getpelican.com/">Pelican</a>, which takes great advantage of <a
+          href="https://www.python.org/">Python</a>.
+      </address><!-- /#about -->
+    </div>
+  </footer><!-- /#contentinfo -->
+</body>
+
+</html>
