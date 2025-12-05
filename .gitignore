@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environment
+venv/
+env/
+.venv/
+.env
+
+# Pelican
+output/
+cache/
+__pycache__/
+.cache/
+
+# Mac
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
