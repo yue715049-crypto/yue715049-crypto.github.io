@@ -21,7 +21,7 @@ Planning a trip to Taichung? Here are the top 5 attractions you shouldn't miss i
 </div>
 
 <!-- Ad Slot -->
-{% include 'adsense.html' %}
+<!-- Ad Slot (Handled by Template) -->
 
 <div class="spot-item">
     <h2 class="spot-title">2. Rainbow Village (彩虹眷村)</h2>
