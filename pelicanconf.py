@@ -9,9 +9,11 @@ TIMEZONE = 'Asia/Taipei'
 DEFAULT_LANG = 'zh-TW'
 
 # Static paths
-STATIC_PATHS = ['images', 'extra/robots.txt']
+# Static paths
+STATIC_PATHS = ['images', 'extra/robots.txt', 'extra/CNAME']
 EXTRA_PATH_METADATA = {
     'extra/robots.txt': {'path': 'robots.txt'},
+    'extra/CNAME': {'path': 'CNAME'},
 }
 
 # Feed generation is usually not desired when developing

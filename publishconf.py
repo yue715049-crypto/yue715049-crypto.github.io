@@ -8,7 +8,7 @@ from pelicanconf import *
 
 # If your site is available via HTTPS, make sure SITEURL begins with https://
 # SITEURL = 'https://<your-username>.github.io/<your-repo-name>'
-SITEURL = '' # Set this to your GitHub Pages URL (e.g., https://username.github.io/repo)
+SITEURL = 'https://travel.yue-lai.com' # Set this to your GitHub Pages URL (e.g., https://username.github.io/repo)
 RELATIVE_URLS = False
 
 FEED_ALL_ATOM = 'feeds/all.atom.xml'
