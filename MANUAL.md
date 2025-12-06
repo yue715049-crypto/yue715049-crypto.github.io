@@ -14,7 +14,7 @@ SITEURL = ''                 # 網站網址 (本地開發時留空)
 ## 2. 選單設定 (Menu)
 您可以自由新增或修改頂部的導航選單。支援下拉式選單 (Dropdown)。
 
-找到 `MENUITEMS` 設定區塊：
+找到 `MENUITEMS` 設定區塊： 
 
 ```python
 MENUITEMS = (
